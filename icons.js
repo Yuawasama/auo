@@ -30,6 +30,7 @@ const ICON_PATHS = {
   book:    '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15"/><path d="M8 8h8M8 11.5h5"/>',
   refresh: '<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v5h-5"/>',
   coffee:  '<path d="M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 3v2M12 3v2"/>',
+  chat:    '<path d="M4 6h16v10H9l-5 4z"/><path d="M8 10h8M8 13h5"/>',
   male:    '<circle cx="12" cy="13" r="5.5"/><path d="M16 9l4-4M16 5h4v4"/>',
   female:  '<circle cx="12" cy="9" r="5.5"/><path d="M12 14.5V21M9 18h6"/>',
   other:   '<circle cx="12" cy="12" r="8.5"/><path d="M12 8v.01M12 11v5"/>',
