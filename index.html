@@ -55,14 +55,14 @@ body{
 /* 正文区 */
 #stage{
   flex:1 1 auto; overflow-y:auto; overflow-x:hidden;
-  padding:16px 16px 24px; -webkit-overflow-scrolling:touch;
-  scroll-behavior:smooth;
+  padding:18px 18px 28px; -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth; font-size:15.5px; line-height:1.75;
 }
 #stage::-webkit-scrollbar{width:4px;}
 #stage::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px;}
-.para{margin:0 0 14px; animation:fadeUp .35s ease both;}
+.para{margin:0 0 16px; animation:fadeUp .35s ease both; font-size:15.5px; line-height:1.75;}
 .para.narr{color:var(--txt);}
-.para.think{color:var(--dim);font-style:italic;font-size:14px;}
+.para.think{color:var(--dim);font-style:italic;font-size:15px;}
 .para.sys{color:var(--cyan);font-size:13px;background:rgba(111,224,224,.07);border-left:2px solid var(--cyan);padding:6px 10px;border-radius:0 6px 6px 0;}
 .para.good{color:var(--green);font-size:13.5px;}
 .para.bad{color:var(--red);font-size:13.5px;}
@@ -72,17 +72,17 @@ body{
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 /* 选项区 */
 #choices{
-  flex:0 0 auto; padding:10px 14px calc(12px + var(--safe));
+  flex:0 0 auto; padding:8px 14px calc(10px + var(--safe));
   background:linear-gradient(0deg,rgba(21,18,40,.99),rgba(21,18,40,.9));
-  border-top:1px solid var(--line); max-height:52vh; overflow-y:auto;
+  border-top:1px solid var(--line); max-height:38vh; overflow-y:auto;
 }
 #choices::-webkit-scrollbar{width:3px;}
 #choices::-webkit-scrollbar-thumb{background:var(--line2);}
 .choice{
   display:block; width:100%; text-align:left;
   background:var(--card); border:1px solid var(--line2);
-  color:var(--txt); border-radius:11px; padding:11px 14px;
-  margin-bottom:8px; font-size:14.5px; line-height:1.5;
+  color:var(--txt); border-radius:10px; padding:9px 13px;
+  margin-bottom:6px; font-size:14px; line-height:1.45;
   cursor:pointer; transition:all .15s; font-family:inherit;
   position:relative;
 }
@@ -201,6 +201,14 @@ body{
 .summary-box .sb-row .k{color:var(--dim);}
 .summary-box .sb-row .v{color:var(--txt);font-weight:600;}
 .epitaph{text-align:center;font-size:15px;color:var(--gold);font-style:italic;padding:16px 10px;line-height:1.8;}
+/* 反馈框 */
+.fb-box{
+  margin-top:14px;padding:11px 13px;border-radius:10px;
+  background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);
+  font-size:12.5px;line-height:1.7;color:var(--dim);text-align:center;
+}
+.fb-box .ico{color:var(--purple);vertical-align:-0.2em;}
+.fb-qq{color:var(--purple);font-weight:600;letter-spacing:.3px;}
 /* 自绘图标 */
 .ico{display:inline-block;vertical-align:-0.18em;flex:0 0 auto;}
 .race-card .rc-name .ico{color:var(--gold);vertical-align:-0.22em;margin-right:2px;}
