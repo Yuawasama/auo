@@ -271,6 +271,7 @@ const Game = {
       '<p style="text-align:center">如果这个故事陪你度过了几个夜晚，<br>不妨请作者喝一杯草莓牛奶～</p>' +
       '<img class="qr" src="qrcode.png" alt="微信收款码">' +
       '<p style="text-align:center;font-size:12px;color:var(--dim2)">长按识别 · 微信扫码</p>' +
+      '<div class="fb-box">' + icon('chat',15) + ' 有什么意见或者好点子，欢迎向作者反馈<br><span class="fb-qq">作者 QQ：3131254645</span></div>' +
       '<div class="btn-row"><button onclick="Game.closeModal()">关闭</button></div>'
     );
   },
@@ -642,7 +643,7 @@ const Game = {
     c.int  = this.tempAttrs.int  + r.mods.int;
     c.phy  = this.tempAttrs.phy  + r.mods.phy;
     c.talents = this.tempTalents.slice();
-    c.age = 16;
+    c.age = 6;
 
     // 天赋效果
     c.talents.forEach(id=>{
@@ -701,6 +702,7 @@ const Game = {
       fae:'你在月光下的一朵花里诞生。蝴蝶围着你转圈，森林在为你唱歌。'
     };
     this.para(birthLines[c.raceId] || '你出生了。', 'narr');
+    this.para('六年过去了。你开始记事，也开始对这个世界产生好奇。', 'narr');
     this.para('你的父母给你取名——', 'narr');
 
     this.clearChoices();
@@ -754,8 +756,8 @@ const Game = {
     const c = this.c;
     this.clearAll();
     this.para('◆ 童年 ◆', 'chapter');
-    this.para('十六年过去了。', 'narr');
-    this.para('你长大了。' + this.childhoodText(), 'narr');
+    this.para('六年过去了。', 'narr');
+    this.para('你开始记事了。' + this.childhoodText(), 'narr');
     autoSave(c);
     this.showActions();
   },
