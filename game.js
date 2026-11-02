@@ -14,7 +14,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 /* ---------- 种族定义 ---------- */
 const RACES = [
   {
-    id:'human', name:'人类', cost:0, icon:'🗡',
+    id:'human', name:'人类', cost:0, icon:'human',
     desc:'寿命最短，却最渴望活着。没有天赋异禀，只有无穷的野心与适应力。',
     bonus:'全属性成长均衡 · 学习速度 +20% · 寿命 70~90',
     lifespans:[70,90],
@@ -24,7 +24,7 @@ const RACES = [
     pathDesc:'没有神明眷顾，每一步都靠自己挣。'
   },
   {
-    id:'elf', name:'精灵', cost:4, icon:'🏹',
+    id:'elf', name:'精灵', cost:4, icon:'elf',
     desc:'森林的长子，千年寿命让他们看尽人间。优雅、孤高，也容易寂寞。',
     bonus:'魔法 +3 · 智力 +2 · 寿命 800~1200 · 自然亲和',
     lifespans:[800,1200],
@@ -34,7 +34,7 @@ const RACES = [
     pathDesc:'精灵的宿命是守望，也是告别。'
   },
   {
-    id:'dwarf', name:'矮人', cost:3, icon:'🔨',
+    id:'dwarf', name:'矮人', cost:3, icon:'dwarf',
     desc:'群山之下的工匠，胡子里藏着烈酒与誓言。记仇，也记恩。',
     bonus:'体魄 +4 · 家底 +2 · 寿命 250~350 · 锻造精通',
     lifespans:[250,350],
@@ -44,7 +44,7 @@ const RACES = [
     pathDesc:'一锤一锤，把名字敲进石头里。'
   },
   {
-    id:'orc', name:'兽人', cost:2, icon:'🪓',
+    id:'orc', name:'兽人', cost:2, icon:'orc',
     desc:'被文明排斥的种族，用獠牙和肌肉在夹缝里杀出一条血路。',
     bonus:'体魄 +6 · 魔法 -2 · 寿命 50~70 · 战斗狂怒',
     lifespans:[50,70],
@@ -54,7 +54,7 @@ const RACES = [
     pathDesc:'弱者没有资格谈尊严。'
   },
   {
-    id:'halfling', name:'半身人', cost:1, icon:'🍀',
+    id:'halfling', name:'半身人', cost:1, icon:'halfling',
     desc:'小小的个子，大大的运气。天生擅长在灾难里活下来。',
     bonus:'家底 +3 · 幸运加成 · 寿命 100~150 · 潜行精通',
     lifespans:[100,150],
@@ -64,7 +64,7 @@ const RACES = [
     pathDesc:'活着本身就是一种胜利。'
   },
   {
-    id:'dragon', name:'龙裔', cost:12, icon:'🐉',
+    id:'dragon', name:'龙裔', cost:12, icon:'dragon',
     desc:'远古巨龙的末裔，血液里流淌着毁灭与荣耀。傲慢是刻在骨子里的。',
     bonus:'全属性 +2 · 龙鳞护体 · 寿命 2000~3000 · 龙威',
     lifespans:[2000,3000],
@@ -74,7 +74,7 @@ const RACES = [
     pathDesc:'你的血统既是祝福，也是诅咒。'
   },
   {
-    id:'demon', name:'魔族', cost:10, icon:'😈',
+    id:'demon', name:'魔族', cost:10, icon:'demon',
     desc:'深渊的居民，被光明诸神诅咒的种族。契约与欲望是他们的语言。',
     bonus:'魔法 +5 · 智力 +2 · 寿命 500~800 · 契约之力',
     lifespans:[500,800],
@@ -84,7 +84,7 @@ const RACES = [
     pathDesc:'力量从来都有代价，你付得起吗？'
   },
   {
-    id:'angel', name:'天使', cost:10, icon:'✨',
+    id:'angel', name:'天使', cost:10, icon:'angel',
     desc:'天界的使者，背负着神谕降临人间。圣洁之下，也有不为人知的挣扎。',
     bonus:'魔法 +4 · 体魄 +2 · 寿命 1000~1500 · 圣光治愈',
     lifespans:[1000,1500],
@@ -94,7 +94,7 @@ const RACES = [
     pathDesc:'神的旨意，和你自己的心意，哪个更重要？'
   },
   {
-    id:'undead', name:'亡灵', cost:8, icon:'💀',
+    id:'undead', name:'亡灵', cost:8, icon:'undead',
     desc:'从死亡中归来的人，不再需要呼吸，也不再被世界接纳。',
     bonus:'体魄 +3 · 魔法 +3 · 寿命 不死 · 亡灵之躯',
     lifespans:[9999,9999],
@@ -104,7 +104,7 @@ const RACES = [
     pathDesc:'你已经死过一次了，还怕什么？'
   },
   {
-    id:'fae', name:'妖精', cost:6, icon:'🦋',
+    id:'fae', name:'妖精', cost:6, icon:'fae',
     desc:'诞生于梦境与月光的生灵，情绪就是魔法，任性就是天性。',
     bonus:'魔法 +4 · 家底 -1 · 寿命 300~500 · 幻术精通',
     lifespans:[300,500],
@@ -244,7 +244,7 @@ const Game = {
     const c = this.c;
     if(!c) return;
     $('hud').style.display = 'block';
-    const gsym = c.gender==='男' ? ' ♂' : c.gender==='女' ? ' ♀' : c.gender==='无' ? ' ⚧' : '';
+    const gsym = c.gender==='男' ? ' '+icon('male',13) : c.gender==='女' ? ' '+icon('female',13) : c.gender==='无' ? ' '+icon('other',13) : '';
     $('hudName').textContent = c.name + gsym + ' · ' + (c.race ? c.race.name : '?');
     $('hudAge').textContent = c.alive ? (c.age + ' 岁') : '已故';
     $('stGold').textContent = c.gold;
@@ -267,7 +267,7 @@ const Game = {
 
   showQR(){
     this.modal(
-      '<h3>☕ 请作者喝杯咖啡</h3>' +
+      '<h3>' + icon('coffee',18) + ' 请作者喝杯咖啡</h3>' +
       '<p style="text-align:center">如果这个故事陪你度过了几个夜晚，<br>不妨请作者喝一杯草莓牛奶～</p>' +
       '<img class="qr" src="qrcode.png" alt="微信收款码">' +
       '<p style="text-align:center;font-size:12px;color:var(--dim2)">长按识别 · 微信扫码</p>' +
@@ -316,7 +316,7 @@ const Game = {
     const saves = loadSaves();
     let h = '<h3>存档</h3>';
     if(this.c && this.c.alive){
-      h += '<div class="btn-row" style="margin-bottom:14px"><button class="primary" onclick="Game.doSave()">💾 保存当前进度</button></div>';
+      h += '<div class="btn-row" style="margin-bottom:14px"><button class="primary" onclick="Game.doSave()">' + icon('save',16) + ' 保存当前进度</button></div>';
     }
     if(saves.length===0){
       h += '<p style="text-align:center;color:var(--dim2)">还没有存档</p>';
@@ -403,16 +403,16 @@ const Game = {
     box.className = 'summary-box';
     box.style.margin = '18px 0';
     box.innerHTML =
-      '<div class="sb-title">✦ 世界概览 ✦</div>' +
+      '<div class="sb-title">' + icon('star',14) + ' 世界概览 ' + icon('star',14) + '</div>' +
       '<div class="sb-row"><span class="k">时代</span><span class="v">诸神沉默纪 · 第 1000 年</span></div>' +
       '<div class="sb-row"><span class="k">种族</span><span class="v">10 种可降生血脉</span></div>' +
       '<div class="sb-row"><span class="k">命运</span><span class="v">由你亲手书写</span></div>' +
       '<div class="sb-row"><span class="k">终点</span><span class="v">唯有死亡</span></div>';
     $('stage').appendChild(box);
-    this.choice('✨ 开始新的一生', ()=>this.startNew(), {cls:'special'});
+    this.choice(icon('star',18)+' 开始新的一生', ()=>this.startNew(), {cls:'special'});
     const auto = loadAuto();
     if(auto && auto.alive){
-      this.choice('📖 继续上次的旅程（' + auto.name + ' · ' + auto.age + '岁）', ()=>{
+      this.choice(icon('book',18)+' 继续上次的旅程（' + auto.name + ' · ' + auto.age + '岁）', ()=>{
         this.c = auto;
         this.c.race = RACES.find(r=>r.id===this.c.raceId) || this.c.race;
         this.updateHud(); this.clearAll(); this.resume();
@@ -420,7 +420,7 @@ const Game = {
     }
     const saves = loadSaves();
     if(saves.length>0){
-      this.choice('💾 读取存档', ()=>this.openSave());
+      this.choice(icon('save',16)+' 读取存档', ()=>this.openSave());
     }
   },
 
@@ -453,7 +453,7 @@ const Game = {
       card.className = 'race-card';
       card.dataset.id = r.id;
       card.innerHTML =
-        '<div class="rc-top"><span class="rc-name">' + r.icon + ' ' + r.name + '</span>' +
+        '<div class="rc-top"><span class="rc-name">' + icon(r.icon,20) + ' ' + r.name + '</span>' +
         '<span class="rc-cost">消耗 ' + r.cost + ' 点</span></div>' +
         '<div class="rc-desc">' + r.desc + '</div>' +
         '<div class="rc-bonus">' + r.bonus + '</div>';
@@ -484,10 +484,10 @@ const Game = {
     this.para('性别会影响部分剧情与称呼，但不影响属性。', 'sys');
     this.para('你希望以怎样的身份降生？', 'narr');
     this.clearChoices();
-    this.choice('♂ 男性', ()=>{ this.c.gender='男'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
-    this.choice('♀ 女性', ()=>{ this.c.gender='女'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
-    this.choice('⚧ 无性别 / 其他', ()=>{ this.c.gender='无'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
-    this.choice('🎲 跳过（随机决定）', ()=>{
+    this.choice(icon('male',16)+' 男性', ()=>{ this.c.gender='男'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
+    this.choice(icon('female',16)+' 女性', ()=>{ this.c.gender='女'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
+    this.choice(icon('other',16)+' 无性别 / 其他', ()=>{ this.c.gender='无'; this.stage='attr'; this.showAttrAlloc(); }, {cls:'special'});
+    this.choice(icon('dice',16)+' 跳过（随机决定）', ()=>{
       this.c.gender = pick(['男','女','无']);
       this.toast('命运替你做了选择：' + this.c.gender);
       this.stage='attr'; this.showAttrAlloc();
@@ -513,7 +513,7 @@ const Game = {
   showAttrAlloc(){
     this.clearAll();
     this.para('第二步 · 塑造你的出身', 'chapter');
-    this.para('种族：' + this.tempRace.icon + ' ' + this.tempRace.name + '（已消耗 ' + this.tempRace.cost + ' 点）', 'sys');
+    this.para('种族：' + icon(this.tempRace.icon,18) + ' ' + this.tempRace.name + '（已消耗 ' + this.tempRace.cost + ' 点）', 'sys');
     this.para('把剩下的点数分配到四项属性上。每项初始为 0，最高 15。', 'narr');
 
     const wrap = document.createElement('div');
@@ -606,7 +606,7 @@ const Game = {
     this.choice('← 返回属性分配', ()=>{
       this.stage='attr'; this.showAttrAlloc();
     });
-    this.choice('✦ 完成，降生于世', ()=>this.finishCreation(), {cls:'special'});
+    this.choice(icon('star',16)+' 完成，降生于世', ()=>this.finishCreation(), {cls:'special'});
   },
 
   talLeft(){
@@ -791,20 +791,20 @@ const Game = {
       const ev = MAIN_LINES[c.raceId][c.mainStage];
       const ageOk = !ev.minAge || c.age >= ev.minAge;
       const reqTxt = ageOk ? '' : ('需要 ' + ev.minAge + ' 岁');
-      this.choice('📜 【主线】' + this.mainEventTitle(), ()=>this.triggerMain(),
+      this.choice(icon('main',18)+' 【主线】' + this.mainEventTitle(), ()=>this.triggerMain(),
         {cls:'special', locked:!ageOk, req:reqTxt, reqOk:ageOk});
     }
 
-    this.choice('🎲 探索世界（随机事件）', ()=>this.randomEvent());
-    this.choice('📖 修炼 / 学习', ()=>this.trainAction());
-    this.choice('💼 工作赚钱', ()=>this.workAction());
-    this.choice('🍺 社交活动', ()=>this.socialAction());
-    if(c.age >= 18) this.choice('🏠 个人生活', ()=>this.lifeAction());
+    this.choice(icon('explore',18)+' 探索世界（随机事件）', ()=>this.randomEvent());
+    this.choice(icon('train',18)+' 修炼 / 学习', ()=>this.trainAction());
+    this.choice(icon('work',18)+' 工作赚钱', ()=>this.workAction());
+    this.choice(icon('social',18)+' 社交活动', ()=>this.socialAction());
+    if(c.age >= 18) this.choice(icon('life',18)+' 个人生活', ()=>this.lifeAction());
     this.choice('⏳ 平静地度过一年', ()=>this.passYear());
 
     // 支线
     const sub = this.availableSub();
-    if(sub) this.choice('📜 【支线】' + sub.title, ()=>this.triggerSub(sub), {cls:'special'});
+    if(sub) this.choice(icon('sub',18)+' 【支线】' + sub.title, ()=>this.triggerSub(sub), {cls:'special'});
   },
 
   passYear(){
@@ -909,7 +909,7 @@ const Game = {
     if(ch.check){
       // 掷骰判定
       const r = check(c, ch.check.attr, ch.check.dc, ch.check.bonus||0);
-      this.para('🎲 掷骰：<span class="dice-roll">' + r.dice + '</span> + ' + r.bonus + ' = <b>' + r.total + '</b>  vs  难度 ' + r.dc, 'dice');
+      this.para(icon('dice',14)+' 掷骰：<span class="dice-roll">' + r.dice + '</span> + ' + r.bonus + ' = <b>' + r.total + '</b>  vs  难度 ' + r.dc, 'dice');
       if(r.crit) this.para('大成功！命运站在你这边。', 'good');
       else if(r.fumble) this.para('大失败……事情朝着最糟的方向滑去。', 'bad');
       if(r.success){
@@ -959,16 +959,16 @@ const Game = {
     this.para('你决定把这一年用在提升自己上。', 'narr');
     this.clearChoices();
     const opts = [
-      {label:'📚 研读古籍（智力）', attr:'int', dc:10, eff:{int:1}},
-      {label:'⚔️ 锻炼身体（体魄）', attr:'phy', dc:10, eff:{phy:1}},
-      {label:'✨ 冥想修炼（魔法）', attr:'mag', dc:10, eff:{mag:1}},
-      {label:'💰 学习经商（家底）', attr:'gold', dc:10, eff:{gold:1}},
+      {label:icon('book',16)+' 研读古籍（智力）', attr:'int', dc:10, eff:{int:1}},
+      {label:icon('phy',16)+' 锻炼身体（体魄）', attr:'phy', dc:10, eff:{phy:1}},
+      {label:icon('magic',16)+' 冥想修炼（魔法）', attr:'mag', dc:10, eff:{mag:1}},
+      {label:icon('coin',16)+' 学习经商（家底）', attr:'gold', dc:10, eff:{gold:1}},
     ];
     opts.forEach(o=>{
       this.choice(o.label + ' · 难度 ' + o.dc, ()=>{
         this.clearChoices();
         const r = check(this.c, o.attr, o.dc, 0);
-        this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs ' + r.dc, 'dice');
+        this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs ' + r.dc, 'dice');
         if(r.success){
           this.applyEffect(o.eff);
           this.para('这一年没有白费，你感到自己变强了。', 'good');
@@ -989,11 +989,11 @@ const Game = {
     this.para('你开始寻找谋生的方式。', 'narr');
     this.clearChoices();
     const jobs = [
-      {label:'🧑‍🌾 务农 / 打零工', attr:'phy', dc:8, gain:2, desc:'辛苦，但稳定'},
-      {label:'⚒️ 工匠学徒', attr:'phy', dc:12, gain:4, desc:'需要一定体力'},
-      {label:'📜 抄写员 / 学者助手', attr:'int', dc:12, gain:4, desc:'需要一定智力'},
-      {label:'🔮 魔法学徒', attr:'mag', dc:14, gain:6, desc:'需要较高魔法'},
-      {label:'🗡️ 佣兵 / 冒险者', attr:'phy', dc:15, gain:8, desc:'危险，报酬高'},
+      {label:icon('work',16)+' 务农 / 打零工', attr:'phy', dc:8, gain:2, desc:'辛苦，但稳定'},
+      {label:icon('dwarf',16)+' 工匠学徒', attr:'phy', dc:12, gain:4, desc:'需要一定体力'},
+      {label:icon('scroll',16)+' 抄写员 / 学者助手', attr:'int', dc:12, gain:4, desc:'需要一定智力'},
+      {label:icon('magic',16)+' 魔法学徒', attr:'mag', dc:14, gain:6, desc:'需要较高魔法'},
+      {label:icon('human',16)+' 佣兵 / 冒险者', attr:'phy', dc:15, gain:8, desc:'危险，报酬高'},
     ];
     jobs.forEach(j=>{
       const v = c[j.attr] || 0;
@@ -1001,7 +1001,7 @@ const Game = {
       this.choice(j.label + '（' + j.desc + '）', ()=>{
         this.clearChoices();
         const r = check(c, j.attr, j.dc, 0);
-        this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs ' + r.dc, 'dice');
+        this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs ' + r.dc, 'dice');
         if(r.success){
           const gain = j.gain + Math.floor(v/3);
           this.applyEffect({gold:gain});
@@ -1022,10 +1022,10 @@ const Game = {
     this.para('◆ 社交 ◆', 'chapter');
     this.para('你走进镇上的酒馆，那里总是热闹的。', 'narr');
     this.clearChoices();
-    this.choice('🍺 和陌生人搭话', ()=>{
+    this.choice(icon('social',16)+' 和陌生人搭话', ()=>{
       this.clearChoices();
       const r = check(this.c, 'int', 11, this.c.charm/5);
-      this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 11', 'dice');
+      this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 11', 'dice');
       if(r.success){
         this.para('你们聊得很投机，成了朋友。', 'good');
         this.applyEffect({rep:1, gold:1});
@@ -1034,10 +1034,10 @@ const Game = {
       }
       if(this.c.alive) this.showActions();
     });
-    this.choice('🎭 打听消息', ()=>{
+    this.choice(icon('scroll',16)+' 打听消息', ()=>{
       this.clearChoices();
       const r = check(this.c, 'gold', 10, 0);
-      this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 10', 'dice');
+      this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 10', 'dice');
       if(r.success){
         this.para('你听到了一些有趣的传闻，也许以后用得上。', 'good');
         this.c.flags.heardRumor = true;
@@ -1078,10 +1078,10 @@ const Game = {
     this.para('那个人叫 <b>' + nm + '</b>，是个' + targetGender + '性。', 'sys');
 
     this.clearChoices();
-    this.choice('💗 主动告白', ()=>{
+    this.choice(icon('confess',16)+' 主动告白', ()=>{
       this.clearChoices();
       const r = check(c, 'int', 13, c.charm/4);
-      this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 13', 'dice');
+      this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 13', 'dice');
       if(r.success){
         c.spouseGender = targetGender;
         this.applyEffect({spouse:nm, rep:1});
@@ -1093,10 +1093,10 @@ const Game = {
       if(this.c.alive) this.showActions();
     }, {cls:'special'});
 
-    this.choice('😊 等对方开口', ()=>{
+    this.choice(icon('wait',16)+' 等对方开口', ()=>{
       this.clearChoices();
       const r = check(c, 'gold', 12, c.charm/5);
-      this.para('🎲 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 12', 'dice');
+      this.para(icon('dice',14)+' 掷骰：' + r.dice + ' + ' + r.bonus + ' = <b>' + r.total + '</b> vs 12', 'dice');
       if(r.success){
         c.spouseGender = targetGender;
         this.applyEffect({spouse:nm, rep:1});
@@ -1107,7 +1107,7 @@ const Game = {
       if(this.c.alive) this.showActions();
     });
 
-    this.choice('🚶 就这样吧（跳过）', ()=>{
+    this.choice(icon('skip',16)+' 就这样吧（跳过）', ()=>{
       this.clearChoices();
       this.para('你转过身，走进了人群。有些人，注定只是路过。', 'think');
       c.flags.skipped = (c.flags.skipped||0) + 1;
@@ -1124,15 +1124,15 @@ const Game = {
     const c = this.c;
     this.clearChoices();
     if(!c.spouse){
-      this.choice('💕 出门走走（也许会遇见谁）', ()=>this.meetSomeone());
+      this.choice(icon('heart',16)+' 出门走走（也许会遇见谁）', ()=>this.meetSomeone());
     } else {
-      this.choice('👶 生育子女', ()=>{
+      this.choice(icon('baby',16)+' 生育子女', ()=>{
         this.clearChoices();
         this.applyEffect({child:1, hp:-10});
         this.para('一个新的生命来到了这个世界。', 'good');
         if(this.c.alive) this.showActions();
       });
-      this.choice('🏡 陪伴家人', ()=>{
+      this.choice(icon('home',16)+' 陪伴家人', ()=>{
         this.clearChoices();
         this.applyEffect({hp:20, rep:1});
         this.para('平静的时光，让你恢复了元气。', 'good');
@@ -1181,7 +1181,7 @@ const Game = {
         this.clearChoices();
         if(ch.check){
           const r = check(c, ch.check.attr, ch.check.dc, ch.check.bonus||0);
-          this.para('🎲 掷骰：<span class="dice-roll">'+r.dice+'</span> + '+r.bonus+' = <b>'+r.total+'</b> vs '+r.dc, 'dice');
+          this.para(icon('dice',14)+' 掷骰：<span class="dice-roll">'+r.dice+'</span> + '+r.bonus+' = <b>'+r.total+'</b> vs '+r.dc, 'dice');
           if(r.success){ this.applyEffect(ch.success||{}); if(ch.successText) this.para(ch.successText,'good'); }
           else { this.applyEffect(ch.fail||{}); if(ch.failText) this.para(ch.failText,'bad'); }
         } else {
@@ -1226,7 +1226,7 @@ const Game = {
         this.clearChoices();
         if(ch.check){
           const r = check(c, ch.check.attr, ch.check.dc, ch.check.bonus||0);
-          this.para('🎲 掷骰：'+r.dice+' + '+r.bonus+' = <b>'+r.total+'</b> vs '+r.dc, 'dice');
+          this.para(icon('dice',14)+' 掷骰：'+r.dice+' + '+r.bonus+' = <b>'+r.total+'</b> vs '+r.dc, 'dice');
           if(r.success){ this.applyEffect(ch.success||{}); if(ch.successText) this.para(ch.successText,'good'); }
           else { this.applyEffect(ch.fail||{}); if(ch.failText) this.para(ch.failText,'bad'); }
         } else {
@@ -1306,7 +1306,7 @@ const Game = {
     h += '<div style="font-size:13px;color:var(--dim);margin-top:4px">人生评价</div>';
     h += '</div>';
     h += '<div class="epitaph">' + c.epitaph + '</div>';
-    const gtxt = c.gender==='男' ? ' ♂ 男' : c.gender==='女' ? ' ♀ 女' : c.gender==='无' ? ' ⚧ 无' : '';
+    const gtxt = c.gender==='男' ? ' '+icon('male',13)+' 男' : c.gender==='女' ? ' '+icon('female',13)+' 女' : c.gender==='无' ? ' '+icon('other',13)+' 无' : '';
     h += '<div class="summary-box"><div class="sb-title">' + esc(c.name) + gtxt + ' · ' + (c.race?c.race.name:'?') + '</div>';
     h += '<div class="sb-row"><span class="k">享年</span><span class="v">' + c.age + ' 岁</span></div>';
     h += '<div class="sb-row"><span class="k">死因</span><span class="v">' + c.deathReason + '</span></div>';
@@ -1328,11 +1328,11 @@ const Game = {
     $('stage').appendChild(div);
 
     this.clearChoices();
-    this.choice('🔄 开始新的一生', ()=>{
+    this.choice(icon('refresh',16)+' 开始新的一生', ()=>{
       try{ localStorage.removeItem(AUTO_KEY); }catch(e){}
       this.showTitle();
     }, {cls:'special'});
-    this.choice('💾 查看存档', ()=>this.openSave());
+    this.choice(icon('save',16)+' 查看存档', ()=>this.openSave());
   },
 
   resume(){
