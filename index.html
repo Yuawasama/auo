@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1a">
 <title>艾瑟兰编年史 · 日式西幻人生</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M6 3h9l4 4v14H6z'/><path d='M15 3v4h4'/><path d='M9 12h6M9 16h4'/></svg>">
 <style>
 :root{
   --bg:#0d0b1a; --bg2:#151228; --card:#1c1834; --card2:#241f42;
@@ -201,6 +201,12 @@ body{
 .summary-box .sb-row .k{color:var(--dim);}
 .summary-box .sb-row .v{color:var(--txt);font-weight:600;}
 .epitaph{text-align:center;font-size:15px;color:var(--gold);font-style:italic;padding:16px 10px;line-height:1.8;}
+/* 自绘图标 */
+.ico{display:inline-block;vertical-align:-0.18em;flex:0 0 auto;}
+.race-card .rc-name .ico{color:var(--gold);vertical-align:-0.22em;margin-right:2px;}
+.choice .ico{color:var(--gold);margin-right:2px;}
+.para .ico{color:var(--gold);vertical-align:-0.2em;}
+#tip-link .ico{vertical-align:-0.2em;}
 /* 打赏 */
 #tip-link{
   text-align:center;padding:14px 0 calc(14px + var(--safe));
@@ -251,10 +257,12 @@ body{
   </div>
   <div id="stage"></div>
   <div id="choices"></div>
-  <div id="tip-link" onclick="Game.showQR()">☕ 喜欢这个故事？请作者喝杯咖啡</div>
+  <div id="tip-link" onclick="Game.showQR()"><span id="tip-ico"></span> 喜欢这个故事？请作者喝杯咖啡</div>
 </div>
 <div id="modalRoot"></div>
-<script src="data.js?v=2"></script>
-<script src="game.js?v=2"></script>
+<script src="icons.js?v=3"></script>
+<script src="data.js?v=3"></script>
+<script src="game.js?v=3"></script>
+<script>document.getElementById('tip-ico').innerHTML = icon('coffee',16);</script>
 </body>
 </html>
