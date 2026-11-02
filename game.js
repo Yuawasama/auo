@@ -472,7 +472,6 @@ const Game = {
     this.choice('← 返回', ()=>this.showTitle());
     this.choice('下一步：选择性别 →', ()=>{
       if(!this.tempRace){ this.toast('请先选择种族'); return; }
-      this.tempPoints -= this.tempRace.cost;
       this.stage = 'gender';
       this.showGender();
     }, {cls:'special'});
@@ -551,7 +550,6 @@ const Game = {
 
     this.clearChoices();
     this.choice('← 返回重选种族', ()=>{
-      this.tempPoints += this.tempRace.cost;
       this.tempAttrs = {gold:0,mag:0,int:0,phy:0};
       this.stage = 'race';
       this.showRaceSelect();
