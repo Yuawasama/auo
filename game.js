@@ -245,7 +245,7 @@ const Game = {
     if(!c) return;
     $('hud').style.display = 'block';
     const gsym = c.gender==='男' ? ' '+icon('male',13) : c.gender==='女' ? ' '+icon('female',13) : c.gender==='无' ? ' '+icon('other',13) : '';
-    $('hudName').textContent = c.name + gsym + ' · ' + (c.race ? c.race.name : '?');
+    $('hudName').innerHTML = c.name + gsym + ' · ' + (c.race ? c.race.name : '?');
     $('hudAge').textContent = c.alive ? (c.age + ' 岁') : '已故';
     $('stGold').textContent = c.gold;
     $('stMag').textContent = c.mag;
